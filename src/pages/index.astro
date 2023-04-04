@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 const initialExperience = dayjs()
-  .diff(dayjs("2021-08-23 08:30:00.000+08:00"), "year", true)
+  .diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true)
   .toString()
   .substring(0, 11);
 ---
@@ -16,11 +18,7 @@ const initialExperience = dayjs()
     let experience = document.getElementById("experience");
 
     setInterval(() => {
-      let time = dayjs().diff(
-        dayjs("2021-08-23 08:30:00.000+08:00"),
-        "year",
-        true
-      );
+      let time = dayjs().diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true);
       if (experience?.innerText) {
         experience.innerText = time.toString().substring(0, 11);
       }
