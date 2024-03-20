@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { Boxes } from "../components/aceternity/background-boxes";
+import { cn } from "../utils/cn";
 dayjs.extend(customParseFormat);
 
 const initialExperience = dayjs()
@@ -43,7 +45,7 @@ const initialExperience = dayjs()
       ?.addEventListener("click", handleLinkedIn);
   </script>
 
-  <main>
+  <!-- <main>
     <div class="flex place-items-center h-screen p-8">
       <div class="flex flex-col gap-y-10">
         <p
@@ -120,5 +122,22 @@ const initialExperience = dayjs()
         </div>
       </div>
     </div>
-  </main>
+  </main> -->
+
+  <div
+    class="h-96 relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center rounded-lg"
+  >
+    <div
+      class="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none"
+    >
+    </div>
+
+    <Boxes />
+    <h1 class={cn("md:text-4xl text-xl text-white relative z-20")}>
+      Tailwind is Awesome
+    </h1>
+    <p class="text-center mt-2 text-neutral-300 relative z-20">
+      Framer motion is the best animation library ngl
+    </p>
+  </div>
 </Layout>
