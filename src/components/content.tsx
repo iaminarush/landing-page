@@ -29,7 +29,7 @@ export const Content = () => {
         }}
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
+        {/* <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
           Hello I am Patrick, a frontend developer building web and mobile
           applications using React and React Native for
           <span className="font-space text-rose-400" id="experience">
@@ -37,7 +37,7 @@ export const Content = () => {
             {experience}{" "}
           </span>
           years.
-        </div>
+        </div> */}
       </motion.div>
       
       <Links />

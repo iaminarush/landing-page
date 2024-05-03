@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState, type ReactNode } from "react";
 import { CustomPin } from "../aceternity/custom-3d-pin";
 import { GithubSVG, LinkedInSVG, MailSVG } from "./svgs";
+import { CanvasRevealEffectDemo } from "../aceternity/custom-canvas";
 
 export const Links = () => {
   return (
@@ -15,7 +16,7 @@ export const Links = () => {
       }}
       className="fixed bottom-8"
     >
-      <div className="flex justify-center gap-x-8">
+      {/* <div className="flex justify-center gap-x-8">
         <CustomPin
           linkProps={{
             href: "https://github.com/iaminarush",
@@ -43,7 +44,8 @@ export const Links = () => {
             <LinkedInSVG />
           </SvgWrapper>
         </CustomPin>
-      </div>
+      </div> */}
+      <CanvasRevealEffectDemo />
     </motion.div>
   );
 };

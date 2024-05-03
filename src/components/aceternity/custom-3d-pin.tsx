@@ -1,9 +1,5 @@
-import {
-  useState,
-  type ReactNode,
-  type HTMLAttributes,
-  type AnchorHTMLAttributes,
-} from "react";
+import { useState, type ReactNode, type AnchorHTMLAttributes } from "react";
+import { motion } from "framer-motion";
 
 export const CustomPin = ({
   children,
