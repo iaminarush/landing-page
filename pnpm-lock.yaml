@@ -23,6 +23,9 @@ importers:
       '@react-three/fiber':
         specifier: ^8.16.3
         version: 8.16.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(three@0.164.1)
+      '@tabler/icons-react':
+        specifier: ^3.12.0
+        version: 3.12.0(react@18.2.0)
       '@types/react':
         specifier: ^18.2.67
         version: 18.2.67
@@ -665,6 +668,14 @@ packages:
 
   '@shikijs/core@1.2.0':
     resolution: {integrity: sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==}
+
+  '@tabler/icons-react@3.12.0':
+    resolution: {integrity: sha512-RnJl3HrCqInuC8JJEUxWuYP4OFNYnY2EUtBqZFSpYatPKY3AnvJBIrShJLHf3fiLPpo6xEYAIoB7Qow93JX0fQ==}
+    peerDependencies:
+      react: '>= 16'
+
+  '@tabler/icons@3.12.0':
+    resolution: {integrity: sha512-Im37ar/mQkqLb6XUXsU7nOc4/66VB9/3KLuZ+6tUsJKHHNLaDUkYfCTNG3pnGDI03laByxVf5+umSNK2yPTx8A==}
 
   '@tweenjs/tween.js@23.1.1':
     resolution: {integrity: sha512-ZpboH7pCPPeyBWKf8c7TJswtCEQObFo3bOBYalm99NzZarATALYCo5OhbCa/n4RQyJyHfhkdx+hNrdL5ByFYDw==}
@@ -2876,6 +2887,13 @@ snapshots:
     optional: true
 
   '@shikijs/core@1.2.0': {}
+
+  '@tabler/icons-react@3.12.0(react@18.2.0)':
+    dependencies:
+      '@tabler/icons': 3.12.0
+      react: 18.2.0
+
+  '@tabler/icons@3.12.0': {}
 
   '@tweenjs/tween.js@23.1.1': {}
 
