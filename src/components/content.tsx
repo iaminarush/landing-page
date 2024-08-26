@@ -1,13 +1,6 @@
-import React, { useEffect, useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
 import dayjs from "dayjs";
-import { FloatingDock } from "./aceternity/floating-dock";
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconMail,
-} from "@tabler/icons-react";
-import { AuroraBackground } from "./aceternity/aurora-background";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export const Content = () => {
   return (
