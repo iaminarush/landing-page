@@ -9,16 +9,11 @@ import { Content } from "../components/content";
 import { Dock } from "../components/dock";
 dayjs.extend(customParseFormat);
 
-const initialExperience = dayjs()
-  .diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true)
-  .toString()
-  .substring(0, 11);
 ---
 
-<Layout title="Portfolio">
+<Layout title="About me">
   <AuroraBackground>
     <Content client:only="react" />
   </AuroraBackground>
   <Dock client:only="react" />
-  <!-- </AuroraBackground> -->
 </Layout>
