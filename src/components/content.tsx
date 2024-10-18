@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export const Content = () => {
   return (
-    <>
+    <div className="container mx-auto">
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ export const Content = () => {
           years.
         </div>
       </motion.div>
-    </>
+    </div>
   );
 };
 
