@@ -63,14 +63,14 @@ export const Content = () => {
         <div className="relative flex flex-col gap-4 items-center justify-center px-4">
           <span>
             <TypingAnimation
-              className="text-3xl md:text-7xl font-inter font-bold dark:text-white text-center tracking-tight"
+              className="text-3xl md:text-7xl font-space font-bold dark:text-white text-center tracking-tight"
               cursorStyle="underscore"
               typeSpeed={75}
             >
               Hello I am Patrick, a frontend developer building web and mobile
               applications using React and React Native for
             </TypingAnimation>
-            <Experience />
+            {/* <Experience /> */}
           </span>
         </div>
       </div>
