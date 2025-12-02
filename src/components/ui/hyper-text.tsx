@@ -22,6 +22,12 @@ interface HyperTextProps extends MotionProps {
   animateOnHover?: boolean;
   /** Custom character set for scramble effect. Defaults to uppercase alphabet */
   characterSet?: CharacterSet;
+  /** Whether to animate only once on mount */
+  animateOnce?: boolean;
+  /** Range to highlight with different styling */
+  highlightRange?: { start: number; end: number; className: string };
+  /** Callback when animation completes */
+  onAnimationComplete?: () => void;
 }
 
 const DEFAULT_CHARACTER_SET = Object.freeze(
@@ -39,6 +45,9 @@ export function HyperText({
   startOnView = false,
   animateOnHover = true,
   characterSet = DEFAULT_CHARACTER_SET,
+  animateOnce = false,
+  highlightRange,
+  onAnimationComplete,
   ...props
 }: HyperTextProps) {
   const MotionComponent = motion.create(Component, {
@@ -49,11 +58,16 @@ export function HyperText({
     children.split("")
   );
   const [isAnimating, setIsAnimating] = useState(false);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
   const iterationCount = useRef(0);
   const elementRef = useRef<HTMLElement>(null);
 
   const handleAnimationTrigger = () => {
-    if (animateOnHover && !isAnimating) {
+    if (
+      animateOnHover &&
+      !isAnimating &&
+      (!animateOnce || !animationCompleted)
+    ) {
       iterationCount.current = 0;
       setIsAnimating(true);
     }
@@ -61,6 +75,8 @@ export function HyperText({
 
   // Handle animation start based on view or delay
   useEffect(() => {
+    if (animateOnce && animationCompleted) return;
+
     if (!startOnView) {
       const startTimeout = setTimeout(() => {
         setIsAnimating(true);
@@ -85,7 +101,7 @@ export function HyperText({
     }
 
     return () => observer.disconnect();
-  }, [delay, startOnView]);
+  }, [delay, startOnView, animateOnce, animationCompleted]);
 
   // Handle scramble animation
   useEffect(() => {
@@ -115,18 +131,32 @@ export function HyperText({
         animationFrameId = requestAnimationFrame(animate);
       } else {
         setIsAnimating(false);
+        if (animateOnce) {
+          setAnimationCompleted(true);
+        }
+        onAnimationComplete?.();
       }
     };
 
     animationFrameId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [children, duration, isAnimating, characterSet]);
+  }, [children, duration, isAnimating, characterSet, animateOnce]);
+
+  // Update displayText directly when children change and animation is completed
+  useEffect(() => {
+    if (animationCompleted) {
+      setDisplayText(children.split(""));
+    }
+  }, [children, animationCompleted]);
 
   return (
     <MotionComponent
       ref={elementRef}
-      className={cn("overflow-hidden py-2 text-4xl font-bold", className)}
+      className={cn(
+        "overflow-hidden py-2 text-4xl md:text-7xl font-bold",
+        className
+      )}
       onMouseEnter={handleAnimationTrigger}
       {...props}
     >
@@ -134,7 +164,15 @@ export function HyperText({
         {displayText.map((letter, index) => (
           <motion.span
             key={index}
-            className={cn("font-mono", letter === " " ? "w-3" : "")}
+            className={cn(
+              "font-mono",
+              letter === " " ? "w-3" : "",
+              highlightRange &&
+                index >= highlightRange.start &&
+                index < highlightRange.end
+                ? highlightRange.className
+                : ""
+            )}
           >
             {letter.toUpperCase()}
           </motion.span>
