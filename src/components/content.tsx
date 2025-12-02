@@ -45,22 +45,9 @@ export const Content = () => {
 
     return () => window.removeEventListener("reisze", handleResize);
   }, []);
-  const [experience, setExperience] = useState(
-    dayjs()
-      .diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true)
-      .toString()
-      .substring(0, 11)
-  );
-
-  useEffect(() => {
-    setInterval(() => {
-      let time = dayjs().diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true);
-      setExperience(time.toString().substring(0, 11));
-    }, 75);
-  }, []);
 
   return (
-    <div className="bg-background relative h-dvh w-full overflow-hidden">
+    <div className="bg-background relative h-dvh w-full overflow-hidden flex flex-col justify-center items-center">
       <FlickeringGrid
         className="absolute inset-0 z-0 size-full"
         squareSize={4}
@@ -72,13 +59,9 @@ export const Content = () => {
         width={dimensions.width + 10}
       />
       <div className="container mx-auto">
-        <div className="relative flex flex-col gap-4 items-center justify-center px-4">
+        <div className="relative flex flex-col gap-4 items-center justify-center px-4 text-center">
           <div className="inline-flex items-baseline flex-wrap">
-            <HyperText animateOnHover={false} className="inline">
-              Hello I am Patrick, a frontend developer building web and mobile
-              applications using React and React Native for
-            </HyperText>
-            <Experience />
+            <TextPortion />
           </div>
         </div>
       </div>
@@ -86,8 +69,8 @@ export const Content = () => {
   );
 };
 
-const Experience = () => {
-  const [mounted, setMounted] = useState(false);
+const TextPortion = () => {
+  const [completed, setCompleted] = useState(false);
   const [experience, setExperience] = useState(
     dayjs()
       .diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true)
@@ -96,19 +79,34 @@ const Experience = () => {
   );
 
   useEffect(() => {
-    setInterval(() => {
+    if (!completed) return;
+    const interval = setInterval(() => {
       let time = dayjs().diff(dayjs("2021-08-23", "YYYY-MM-DD"), "year", true);
       setExperience(time.toString().substring(0, 11));
     }, 75);
-  }, []);
-  useEffect(() => setMounted(true), []);
+    return () => clearInterval(interval);
+  }, [completed]);
+
+  const prefix =
+    "Hello I am Patrick a front end developer building web and mobile applications using React and React Native for ";
+  const suffix = " years";
+  const contentString = prefix + experience + suffix;
+
+  const highlightRange = {
+    start: prefix.length,
+    end: prefix.length + experience.length,
+    className: "text-rose-400",
+  };
 
   return (
-    <div
-      className="font-space text-rose-400"
-      key={mounted ? "animated" : "initial"}
+    <HyperText
+      animateOnHover={false}
+      className=""
+      animateOnce={true}
+      highlightRange={highlightRange}
+      onAnimationComplete={() => setCompleted(true)}
     >
-      {experience}
-    </div>
+      {contentString}
+    </HyperText>
   );
 };
