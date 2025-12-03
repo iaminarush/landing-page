@@ -5,12 +5,12 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { AuroraBackground } from "../components/aceternity/aurora-background";
 import { cn } from "../utils/cn";
 import { Content } from "../components/content";
-import { Dock } from "../components/dock";
+import { DockContainer } from "../components/dock";
 dayjs.extend(customParseFormat);
 
 ---
 
 <Layout title="About me">
-    <Content client:only="react" />
-  <!-- <Dock client:only="react" /> -->
+  <Content client:only="react" />
+  <DockContainer client:only="react" />
 </Layout>
