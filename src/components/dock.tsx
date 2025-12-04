@@ -16,7 +16,7 @@ export const DockContainer = () => {
         duration: 0.8,
         ease: "easeInOut",
       }}
-      className="fixed bottom-8 flex items-center justify-center w-full h-[12rem]"
+      className="fixed bottom-0 flex items-center justify-center w-full h-[12rem]"
     >
       <Dock>
         <DockIcon>
